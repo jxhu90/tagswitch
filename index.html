@@ -166,13 +166,13 @@
         });
 
         function openApp(app) {
-            // 各APP的URL Scheme
+            // 各APP的URL Scheme（包含多个备选方案）
             const appSchemes = {
-                unionpay: 'upwallet://',
-                icbc: 'icbc://',
-                douyin: 'aweme://',
-                psbc: 'psbc://',
-                abc: 'abchina://'
+                unionpay: ['upwallet://', 'unionpay://'],
+                icbc: ['com.icbc.iphoneclient://', 'icbc://', 'com.icbc.mobilebank://'],
+                douyin: ['aweme://webview?url=https://www.douyin.com', 'aweme://', 'snssdk1128://'],
+                psbc: ['psbc://', 'com.psbc.mobilebank://'],
+                abc: ['abchina://home', 'abchina://', 'com.abchina.ecmobile://']
             };
 
             // 应用商城链接（如果APP未安装）
@@ -204,7 +204,7 @@
                 }
             };
 
-            const scheme = appSchemes[app];
+            const schemes = appSchemes[app];
             const storeUrl = storeUrls[app];
 
             // 检测设备类型
@@ -231,14 +231,29 @@
                 fallbackUrl = storeUrl.fallback;
             }
 
-            // 尝试打开APP
-            if (scheme) {
-                window.location.href = scheme;
+            // 尝试打开APP（使用多个备选scheme）
+            if (schemes && schemes.length > 0) {
+                // 尝试第一个scheme
+                window.location.href = schemes[0];
                 
-                // 检测是否打开成功，如果失败则跳转到应用商城
-                setTimeout(() => {
-                    window.location.href = fallbackUrl;
-                }, 2000);
+                // 检测是否打开成功，如果失败则尝试下一个scheme或跳转到应用商城
+                let attemptCount = 0;
+                const maxAttempts = schemes.length;
+                
+                const attemptNextScheme = () => {
+                    attemptCount++;
+                    if (attemptCount < maxAttempts) {
+                        // 尝试下一个scheme
+                        window.location.href = schemes[attemptCount];
+                        setTimeout(attemptNextScheme, 1500);
+                    } else {
+                        // 所有scheme都尝试失败，跳转到应用商城
+                        window.location.href = fallbackUrl;
+                    }
+                };
+                
+                // 设置超时，尝试下一个scheme
+                setTimeout(attemptNextScheme, 1500);
             }
         }
     </script>
