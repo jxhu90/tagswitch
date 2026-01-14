@@ -72,41 +72,71 @@
             <div class="max-w-3xl mx-auto">
                 <div class="bg-light rounded-xl shadow-xl p-6 md:p-8">
                     <h2 class="text-2xl font-bold mb-6 text-center">选择支付APP</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="app-list overflow-y-auto max-h-[500px] pr-2">
                         <!-- 云闪付APP -->
-                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="unionpay">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center card-hover app-card" data-app="unionpay">
+                            <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mr-4">
                                 <i class="fa fa-bolt text-primary text-2xl"></i>
                             </div>
-                            <h3 class="font-semibold">云闪付APP</h3>
+                            <div>
+                                <h3 class="font-semibold text-lg">云闪付APP</h3>
+                                <p class="text-gray-500 text-sm">银联官方支付APP</p>
+                            </div>
+                            <div class="ml-auto">
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </div>
                         </div>
                         <!-- 工商银行APP -->
-                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="icbc">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-red-100 flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center card-hover app-card" data-app="icbc">
+                            <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mr-4">
                                 <i class="fa fa-university text-red-600 text-2xl"></i>
                             </div>
-                            <h3 class="font-semibold">工商银行APP</h3>
+                            <div>
+                                <h3 class="font-semibold text-lg">工商银行APP</h3>
+                                <p class="text-gray-500 text-sm">中国工商银行官方APP</p>
+                            </div>
+                            <div class="ml-auto">
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </div>
                         </div>
                         <!-- 抖音APP -->
-                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="douyin">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-black flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center card-hover app-card" data-app="douyin">
+                            <div class="w-16 h-16 rounded-full bg-black flex items-center justify-center mr-4">
                                 <i class="fa fa-music text-white text-2xl"></i>
                             </div>
-                            <h3 class="font-semibold">抖音APP</h3>
+                            <div>
+                                <h3 class="font-semibold text-lg">抖音APP</h3>
+                                <p class="text-gray-500 text-sm">短视频社交平台</p>
+                            </div>
+                            <div class="ml-auto">
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </div>
                         </div>
                         <!-- 邮储APP -->
-                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="psbc">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center card-hover app-card" data-app="psbc">
+                            <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mr-4">
                                 <i class="fa fa-envelope text-green-600 text-2xl"></i>
                             </div>
-                            <h3 class="font-semibold">邮储APP</h3>
+                            <div>
+                                <h3 class="font-semibold text-lg">邮储APP</h3>
+                                <p class="text-gray-500 text-sm">中国邮政储蓄银行官方APP</p>
+                            </div>
+                            <div class="ml-auto">
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </div>
                         </div>
                         <!-- 农业银行APP -->
-                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="abc">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
+                        <div class="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center card-hover app-card" data-app="abc">
+                            <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mr-4">
                                 <i class="fa fa-leaf text-green-600 text-2xl"></i>
                             </div>
-                            <h3 class="font-semibold">农业银行APP</h3>
+                            <div>
+                                <h3 class="font-semibold text-lg">农业银行APP</h3>
+                                <p class="text-gray-500 text-sm">中国农业银行官方APP</p>
+                            </div>
+                            <div class="ml-auto">
+                                <i class="fa fa-chevron-right text-gray-400"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,25 +175,69 @@
                 abc: 'abchina://'
             };
 
-            // 备用链接（如果APP未安装）
-            const fallbackUrls = {
-                unionpay: 'https://www.unionpay.com/',
-                icbc: 'https://www.icbc.com.cn/',
-                douyin: 'https://www.douyin.com/',
-                psbc: 'https://www.psbc.com/',
-                abc: 'https://www.abchina.com/'
+            // 应用商城链接（如果APP未安装）
+            const storeUrls = {
+                unionpay: {
+                    ios: 'https://apps.apple.com/cn/app/%E4%BA%91%E9%97%AA%E4%BB%98/id1032223183',
+                    android: 'https://play.google.com/store/apps/details?id=com.unionpay',
+                    fallback: 'https://www.unionpay.com/'
+                },
+                icbc: {
+                    ios: 'https://apps.apple.com/cn/app/%E5%B7%A5%E5%95%86%E9%93%B6%E8%A1%8C/id472250842',
+                    android: 'https://play.google.com/store/apps/details?id=com.icbc',
+                    fallback: 'https://www.icbc.com.cn/'
+                },
+                douyin: {
+                    ios: 'https://apps.apple.com/cn/app/%E6%8A%96%E9%9F%B3/id1142110895',
+                    android: 'https://play.google.com/store/apps/details?id=com.ss.android.ugc.aweme',
+                    fallback: 'https://www.douyin.com/'
+                },
+                psbc: {
+                    ios: 'https://apps.apple.com/cn/app/%E9%82%AE%E5%82%A8%E9%93%B6%E8%A1%8C/id503318702',
+                    android: 'https://play.google.com/store/apps/details?id=com.psbc.payclient',
+                    fallback: 'https://www.psbc.com/'
+                },
+                abc: {
+                    ios: 'https://apps.apple.com/cn/app/%E5%86%9C%E4%B8%9A%E9%93%B6%E8%A1%8C/id451158827',
+                    android: 'https://play.google.com/store/apps/details?id=com.abchina.ecmobile',
+                    fallback: 'https://www.abchina.com/'
+                }
             };
 
             const scheme = appSchemes[app];
-            const fallback = fallbackUrls[app];
+            const storeUrl = storeUrls[app];
+
+            // 检测设备类型
+            function getDeviceType() {
+                const userAgent = navigator.userAgent.toLowerCase();
+                if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+                    return 'ios';
+                } else if (userAgent.includes('android')) {
+                    return 'android';
+                } else {
+                    return 'other';
+                }
+            }
+
+            const deviceType = getDeviceType();
+            let fallbackUrl;
+
+            // 根据设备类型选择合适的应用商城链接
+            if (deviceType === 'ios' && storeUrl.ios) {
+                fallbackUrl = storeUrl.ios;
+            } else if (deviceType === 'android' && storeUrl.android) {
+                fallbackUrl = storeUrl.android;
+            } else {
+                fallbackUrl = storeUrl.fallback;
+            }
 
             // 尝试打开APP
             if (scheme) {
                 window.location.href = scheme;
                 
-                // 检测是否打开成功，如果失败则跳转到备用链接
+                // 检测是否打开成功，如果失败则跳转到应用商城
                 setTimeout(() => {
-                    window.location.href = fallback;
+                    window.location.href = fallbackUrl;
                 }, 2000);
             }
         }
