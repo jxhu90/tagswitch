@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>银联标签支付产品</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E60012',
+                        secondary: '#0066CC',
+                        dark: '#333333',
+                        light: '#F5F5F5'
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Microsoft YaHei', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #E60012 0%, #0066CC 100%);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+                    <i class="fa fa-credit-card text-white text-xl"></i>
+                </div>
+                <h1 class="text-xl font-bold text-primary">银联标签支付</h1>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="pt-24 pb-16 md:pt-32 md:pb-24 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight mb-6 text-shadow">
+                银联标签支付产品
+            </h1>
+            <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-10 max-w-2xl mx-auto">
+                选择您喜欢的支付APP，快速完成支付流程
+            </p>
+        </div>
+    </section>
+
+    <!-- APP选择器区域 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-light rounded-xl shadow-xl p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-6 text-center">选择支付APP</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <!-- 云闪付APP -->
+                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="unionpay">
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
+                                <i class="fa fa-bolt text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold">云闪付APP</h3>
+                        </div>
+                        <!-- 工商银行APP -->
+                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="icbc">
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-red-100 flex items-center justify-center">
+                                <i class="fa fa-university text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold">工商银行APP</h3>
+                        </div>
+                        <!-- 抖音APP -->
+                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="douyin">
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-black flex items-center justify-center">
+                                <i class="fa fa-music text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold">抖音APP</h3>
+                        </div>
+                        <!-- 邮储APP -->
+                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="psbc">
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fa fa-envelope text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold">邮储APP</h3>
+                        </div>
+                        <!-- 农业银行APP -->
+                        <div class="bg-white rounded-lg shadow-md p-4 text-center card-hover app-card" data-app="abc">
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fa fa-leaf text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold">农业银行APP</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 银联标签支付产品. 保留所有权利。</p>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script>
+        // APP跳转功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const appCards = document.querySelectorAll('.app-card');
+            
+            appCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const app = this.getAttribute('data-app');
+                    openApp(app);
+                });
+            });
+        });
+
+        function openApp(app) {
+            // 各APP的URL Scheme
+            const appSchemes = {
+                unionpay: 'upwallet://',
+                icbc: 'icbc://',
+                douyin: 'aweme://',
+                psbc: 'psbc://',
+                abc: 'abchina://'
+            };
+
+            // 备用链接（如果APP未安装）
+            const fallbackUrls = {
+                unionpay: 'https://www.unionpay.com/',
+                icbc: 'https://www.icbc.com.cn/',
+                douyin: 'https://www.douyin.com/',
+                psbc: 'https://www.psbc.com/',
+                abc: 'https://www.abchina.com/'
+            };
+
+            const scheme = appSchemes[app];
+            const fallback = fallbackUrls[app];
+
+            // 尝试打开APP
+            if (scheme) {
+                window.location.href = scheme;
+                
+                // 检测是否打开成功，如果失败则跳转到备用链接
+                setTimeout(() => {
+                    window.location.href = fallback;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
